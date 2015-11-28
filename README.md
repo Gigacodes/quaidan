@@ -9,6 +9,7 @@ balancer manager.
 
 Quaidan currently has two features:
 
+* Enable and disable cluster members.
 * Provide the current state of the load balancer.
 * Update cluster members.
 
@@ -88,6 +89,22 @@ update_member.drainig_mode = True
 update_member.enabled = True
 update_member.hot_standby = True
 balancer_manager.send_command(update_member)
+```
+
+The most common use case is enabling and disabling cluster members. For
+your convenience there are two specific commands for these actions.
+Disable a cluster member by sending a `DisableCommand`.
+
+```python
+disable_member = DisableMember('cluster name', 'worker url')
+balancer_manager.send_command(disable_member)
+```
+
+The member can be enabled again by sending an `EnableCommand`
+
+```python
+enable_member = EnableMember('cluster name', 'worker url')
+balancer_manager.send_command(enable_member)
 ```
 
 Contributing
